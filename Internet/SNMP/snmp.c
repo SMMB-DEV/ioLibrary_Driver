@@ -150,7 +150,7 @@ int32_t snmpd_run(void)
 	uint8_t svr_addr[6];
 	uint16_t  svr_port;
 
-	if(SOCK_SNMP_AGENT > _WIZCHIP_SOCK_NUM_) return -99;
+	if(SOCK_SNMP_AGENT >= _WIZCHIP_SOCK_NUM_) return -99;
     
 	switch(getSn_SR(SOCK_SNMP_AGENT))
 	{
@@ -179,6 +179,7 @@ int32_t snmpd_run(void)
 				if (parseSNMPMessage() != -1)
 				{
 					sendto(SOCK_SNMP_AGENT, response_msg.buffer, response_msg.index, svr_addr, svr_port);
+					return 2;
 				}
 
 #ifdef _SNMP_DEBUG_
@@ -189,7 +190,7 @@ int32_t snmpd_run(void)
 
 		case SOCK_CLOSED :
 			if((ret = socket(SOCK_SNMP_AGENT, Sn_MR_UDP, PORT_SNMP_AGENT, 0x00)) != SOCK_SNMP_AGENT)
-				return ret;
+				return -ret;
 #ifdef _SNMP_DEBUG_
 			printf(" - [%d] UDP Socket for SNMP Agent, port [%d]\r\n", SOCK_SNMP_AGENT, PORT_SNMP_AGENT);
 #endif
@@ -206,14 +207,10 @@ int32_t snmpd_run(void)
 
 int32_t findEntry(uint8_t *oid, int32_t len)
 {
-	int32_t i;
-
-	for (i = 0 ; i < maxData ; i++)
+	for (int32_t i = 0 ; i < maxData ; i++)
 	{
-		if (len == snmpData[i].oidlen)
-		{
-			if (!memcmp(snmpData[i].oid, oid, len)) return(i);
-		}
+		if (len == snmpData[i].oidlen && !memcmp(snmpData[i].oid, oid, len))
+			return i;
 	}
 
 	return OID_NOT_FOUND;
@@ -393,31 +390,26 @@ int32_t setEntry(int32_t id, void *val, int32_t vlen, uint8_t dataType, int32_t 
 	{
 	case SNMPDTYPE_OCTET_STRING :
 	case SNMPDTYPE_OBJ_ID :
-		{
-			uint8_t *string = val;
-			for (j = 0 ; j < vlen ; j++)
-			{
-				snmpData[id].u.octetstring[j] = string[j];
-			}
-			snmpData[id].dataLen = vlen;
-		}
-		retStatus = SNMP_SUCCESS;
-		break;
+	{
+		uint8_t *string = val;
+		for (j = 0 ; j < vlen ; j++)
+			snmpData[id].u.octetstring[j] = string[j];
+		
+		goto success;
+	}
 
 	case SNMPDTYPE_INTEGER :
 	case SNMPDTYPE_TIME_TICKS :
 	case SNMPDTYPE_COUNTER :
 	case SNMPDTYPE_GAUGE :
-		{
-			snmpData[id].u.intval = getValue( (uint8_t *)val, vlen);
-			snmpData[id].dataLen = vlen;
-
-			if (snmpData[id].setfunction != NULL)
-			{
-				snmpData[id].setfunction(snmpData[id].u.intval);
-			}
-
-		}
+		snmpData[id].u.intval = getValue( (uint8_t *)val, vlen);
+		
+	success:
+		snmpData[id].dataLen = vlen;
+		
+		if (snmpData[id].setfunction != NULL)
+			snmpData[id].setfunction(id);
+		
 		retStatus = SNMP_SUCCESS;
 		break;
 
