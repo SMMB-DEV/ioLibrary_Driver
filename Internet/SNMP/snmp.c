@@ -150,7 +150,7 @@ int32_t snmpd_run(void)
 	uint8_t svr_addr[6];
 	uint16_t  svr_port;
 
-	if(SOCK_SNMP_AGENT > _WIZCHIP_SOCK_NUM_) return -99;
+	if(SOCK_SNMP_AGENT >= _WIZCHIP_SOCK_NUM_) return -99;
     
 	switch(getSn_SR(SOCK_SNMP_AGENT))
 	{
@@ -179,6 +179,7 @@ int32_t snmpd_run(void)
 				if (parseSNMPMessage() != -1)
 				{
 					sendto(SOCK_SNMP_AGENT, response_msg.buffer, response_msg.index, svr_addr, svr_port);
+					return 2;
 				}
 
 #ifdef _SNMP_DEBUG_
@@ -189,7 +190,7 @@ int32_t snmpd_run(void)
 
 		case SOCK_CLOSED :
 			if((ret = socket(SOCK_SNMP_AGENT, Sn_MR_UDP, PORT_SNMP_AGENT, 0x00)) != SOCK_SNMP_AGENT)
-				return ret;
+				return -ret;
 #ifdef _SNMP_DEBUG_
 			printf(" - [%d] UDP Socket for SNMP Agent, port [%d]\r\n", SOCK_SNMP_AGENT, PORT_SNMP_AGENT);
 #endif
