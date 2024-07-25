@@ -50,7 +50,7 @@
 //
 //*****************************************************************************
 
-#include "socket.h"
+#include "..\..\Ethernet\socket.h"
 #include "dhcp.h"
 
 /* If you want to display debug & processing message, Define _DHCP_DEBUG_ in dhcp.h */
