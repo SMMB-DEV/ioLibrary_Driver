@@ -596,7 +596,7 @@ int8_t parseDHCPMSG(void)
    
    if((len = getSn_RX_RSR(DHCP_SOCKET)) > 0)
    {
-   	len = recvfrom(DHCP_SOCKET, (uint8_t *)pDHCPMSG, len, svr_addr, &svr_port);
+   	len = recvfrom(DHCP_SOCKET, (uint8_t *)pDHCPMSG, len, svr_addr, &svr_port, true);
    #ifdef _DHCP_DEBUG_   
       printf("DHCP message : %d.%d.%d.%d(%d) %d received. \r\n",svr_addr[0],svr_addr[1],svr_addr[2], svr_addr[3],svr_port, len);
    #endif   

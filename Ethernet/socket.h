@@ -90,6 +90,8 @@
 
 #include "wizchip_conf.h"
 
+#include <stdbool.h>
+
 #define SOCKET                uint8_t  ///< SOCKET type define for legacy driver
 
 #define SOCK_OK               1        ///< Result is OK about socket process.
@@ -327,7 +329,7 @@ int32_t sendto(uint8_t sn, const uint8_t * buf, uint16_t len, const uint8_t * ad
  *                       @ref SOCKERR_SOCKNUM    - Invalid socket number \n
  *                       @ref SOCKBUSY           - Socket is busy.
  */
-int32_t recvfrom(uint8_t sn, uint8_t * buf, uint16_t len, uint8_t * addr, uint16_t *port, bool block = true);
+int32_t recvfrom(uint8_t sn, uint8_t * buf, uint16_t len, uint8_t * addr, uint16_t *port, bool block);
 
 
 /////////////////////////////
