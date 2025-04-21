@@ -1,6 +1,6 @@
 # ioLibrary Driver
 The ioLibrary means “Internet Offload Library” for WIZnet chip. It includes drivers and application protocols.
-The driver (ioLibrary) can be used for the application design of WIZnet TCP/IP chips as [W5500](http://wizwiki.net/wiki/doku.php?id=products:w5500:start), W5300, W5200, W5100 [W5100S](http://wizwiki.net/wiki/doku.php?id=products:w5100s:start).
+The driver (ioLibrary) can be used for the application design of WIZnet TCP/IP chips as [W5500](https://docs.wiznet.io/Product/iEthernet/W5500/overview), W5300, W5200, W5100 [W5100S](https://docs.wiznet.io/Product/iEthernet/W5100S/overview).
 
 ## ioLibrary
 This driver provides the Berkeley Socket type APIs.
@@ -29,13 +29,25 @@ ioLibrary
     ┃  ┣ W5300
     ┃  ┃  ┣ w5300.c
     ┃  ┃  ┗ w5300.h
-    ┃  ┗ W5500
-    ┃     ┣ w5500.c
-    ┃     ┗ w5500.h
+    ┃  ┣ W5500
+    ┃  ┃  ┣ w5500.c
+    ┃  ┃  ┗ w5500.h
+    ┃  ┣ W6100
+    ┃  ┃  ┣ w6100.c
+    ┃  ┃  ┗ w6100.h
+    ┃  ┗ W6300
+    ┃     ┣ w6300.c
+    ┃     ┗ w6300.h
     ┗ Internet
+       ┣ AAC
+       ┃  ┣ AddressAutoConfig.c
+       ┃  ┗ AddressAutoConfig.h
        ┣ DHCP
        ┃  ┣ dhcp.c
        ┃  ┗ dhcp.h
+       ┣ DHCP6
+       ┃  ┣ dhcp6.c
+       ┃  ┗ dhcp6.h
        ┣ DNS
        ┃  ┣ dns.c
        ┃  ┗ dns.h
@@ -78,7 +90,7 @@ ioLibrary
 
 ```
 
-- Ethernet : SOCKET APIs like BSD & WIZCHIP([W5500](http://wizwiki.net/wiki/doku.php?id=products:w5500:start) / W5300 /  W5200 / W5100 / [W5100S](http://wizwiki.net/wiki/doku.php?id=products:w5100s:start)) Driver
+- Ethernet : SOCKET APIs like BSD & WIZCHIP([W5500](https://docs.wiznet.io/Product/iEthernet/W5500/overview) / W5300 /  W5200 / W5100 / [W5100S](https://docs.wiznet.io/Product/iEthernet/W5100S/overview)) Driver
 - Internet :
   - DHCP client
   - DNS client
