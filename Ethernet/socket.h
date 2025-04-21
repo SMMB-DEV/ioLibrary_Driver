@@ -90,8 +90,6 @@
 
 #include "wizchip_conf.h"
 
-#include <stdbool.h>
-
 #define SOCKET                uint8_t  ///< SOCKET type define for legacy driver
 
 #define SOCK_OK               1        ///< Result is OK about socket process.

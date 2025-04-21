@@ -203,7 +203,7 @@ uint8_t DHCP_allocated_sn[4]  = {0, };    // Subnet mask from DHCP
 uint8_t DHCP_allocated_dns[4] = {0, };    // DNS address from DHCP
 
 
-int8_t   dhcp_state        = STATE_DHCP_INIT;   // DHCP state
+int8_t   dhcp_state        = STATE_DHCP_STOP;   // DHCP state
 int8_t   dhcp_retry_count  = 0;                 
 
 uint32_t dhcp_lease_time   			= INFINITE_LEASETIME;
