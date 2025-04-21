@@ -411,7 +411,7 @@ typedef struct __WIZCHIP
       struct
       {
          uint8_t (*_read_byte)   (void);
-         void    (*_write_byte)  (const uint8_t wb);
+         void    (*_write_byte)  (uint8_t wb);
          void    (*_read_burst)  (uint8_t* pBuf, uint16_t len);
          void    (*_write_burst) (const uint8_t* pBuf, uint16_t len);
       }SPI;

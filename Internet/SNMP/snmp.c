@@ -864,7 +864,7 @@ int32_t makeTrapVariableBindings(dataEntryType *oid_data, void *ptr, uint32_t *l
 }
 
 
-int32_t snmp_sendTrap(const uint8_t * const managerIP, const uint8_t * const agentIP, int8_t* community, const dataEntryType enterprise_oid, uint32_t genericTrap, uint32_t specificTrap, uint32_t va_count, ...)
+int32_t snmp_sendTrap(const uint8_t * managerIP, const uint8_t * agentIP, int8_t* community, dataEntryType enterprise_oid, uint32_t genericTrap, uint32_t specificTrap, uint32_t va_count, ...)
 {
 	uint32_t i;
 	int32_t packet_index = 0;

@@ -173,7 +173,7 @@ uint8_t wizchip_spi_readbyte(void)        {return 0;}
  * null function is called.
  */
 //void 	wizchip_spi_writebyte(uint8_t wb) {};
-void 	wizchip_spi_writebyte(const uint8_t wb) {}
+void 	wizchip_spi_writebyte(uint8_t wb) {}
 
 /**
  * @brief Default function to burst read in SPI interface.
@@ -394,7 +394,7 @@ void reg_wizchip_spi_cbfunc( uint8_t (*spi_rb)(void),
 }
 #else 
 
-void reg_wizchip_spi_cbfunc(uint8_t (*spi_rb)(void), void (*spi_wb)(const uint8_t wb))
+void reg_wizchip_spi_cbfunc(uint8_t (*spi_rb)(void), void (*spi_wb)(uint8_t wb))
 {
    while(!(WIZCHIP.if_mode & _WIZCHIP_IO_MODE_SPI_));
    
