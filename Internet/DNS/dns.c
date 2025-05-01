@@ -52,7 +52,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "socket.h"
+#include "..\..\Ethernet\socket.h"
 #include "dns.h"
 
 #ifdef _DNS_DEBUG_
@@ -67,23 +67,23 @@
 #define	TYPE_MD		3	   /* Mail destination (obsolete) */
 #define	TYPE_MF		4	   /* Mail forwarder (obsolete) */
 #define	TYPE_CNAME	5	   /* Canonical name */
-#define	TYPE_SOA	   6	   /* Start of Authority */
+#define	TYPE_SOA	6	   /* Start of Authority */
 #define	TYPE_MB		7	   /* Mailbox name (experimental) */
 #define	TYPE_MG		8	   /* Mail group member (experimental) */
 #define	TYPE_MR		9	   /* Mail rename name (experimental) */
 #define	TYPE_NULL	10	   /* Null (experimental) */
-#define	TYPE_WKS	   11	   /* Well-known sockets */
-#define	TYPE_PTR	   12	   /* Pointer record */
+#define	TYPE_WKS	11	   /* Well-known sockets */
+#define	TYPE_PTR	12	   /* Pointer record */
 #define	TYPE_HINFO	13	   /* Host information */
 #define	TYPE_MINFO	14	   /* Mailbox information (experimental)*/
 #define	TYPE_MX		15	   /* Mail exchanger */
-#define	TYPE_TXT	   16	   /* Text strings */
-#define	TYPE_ANY	   255	/* Matches any type */
+#define	TYPE_TXT	16	   /* Text strings */
+#define	TYPE_ANY	255	   /* Matches any type */
 
-#define	CLASS_IN	   1	   /* The ARPA Internet */
+#define	CLASS_IN	1	   /* The ARPA Internet */
 
 /* Round trip timing parameters */
-#define	AGAIN	      8     /* Average RTT gain = 1/8 */
+#define	AGAIN	    8     /* Average RTT gain = 1/8 */
 #define	LAGAIN      3     /* Log2(AGAIN) */
 #define	DGAIN       4     /* Mean deviation gain = 1/4 */
 #define	LDGAIN      2     /* log2(DGAIN) */
@@ -499,7 +499,7 @@ void DNS_init(uint8_t s, uint8_t * buf)
 }
 
 /* DNS CLIENT RUN */
-int8_t DNS_run(uint8_t * dns_ip, uint8_t * name, uint8_t * ip_from_dns)
+int8_t DNS_run(const uint8_t * dns_ip, const uint8_t * name, uint8_t * ip_from_dns)
 {
 	int8_t ret;
 	struct dhdr dhp;

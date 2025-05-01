@@ -670,8 +670,8 @@ int32_t recv(uint8_t sn, uint8_t * buf, uint16_t len)//lihan
             return SOCKERR_SOCKSTATUS;
          }
       }
-      if(sock_io_mode & (1<<sn)) return SOCK_BUSY;
       if(recvsize != 0) break;
+      if(sock_io_mode & (1<<sn)) return SOCK_BUSY;
    };
 #if _WIZCHIP_ == 5300
    }
